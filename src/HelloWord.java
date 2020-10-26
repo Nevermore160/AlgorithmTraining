@@ -6,12 +6,44 @@ import java.util.*;
 public class HelloWord {
 
     public static void main(String[] args) {
-        String[] a = {"abcd", "dcba", "lls", "s", "sssll"};
-        System.out.println(Solution.combine(4,2));
+        System.out.println(Solution.isPerfectSquare(2147483647));
     }
 
     @SuppressWarnings("all") //压制警告
     static class Solution {
+        public static boolean isPerfectSquare(int num) {
+            if (num == 1 || num == 0) return true;
+            long n = num / 2, x = 0, y = num, k = 0;
+            long m;
+            while (x - y != -1 && x != y && x - y != 1){
+                m = n * n * 1L;
+                if (m < num) {
+                    x = n;
+                    n = (n + y) / 2;
+                }
+                if (m > num){
+                    y = n;
+                    n = (x + n) / 2;
+                }
+                if (n * n == num) return true;
+            }
+            return false;
+        }
+
+        public static boolean isPalindrome(ListNode head) {
+            if (head == null) return true;
+            List<Integer> list = new ArrayList<>();
+            while (head.next != null) {
+                list.add(head.val);
+                head = head.next;
+            }
+            list.add(head.val);
+            for (int i = 0; i < list.size(); i++) {
+                if (!list.get(i).equals(list.get(list.size() - 1 - i))) return false;
+            }
+            return true;
+        }
+
         public static List<List<Integer>> combine(int n, int k) {
             List<List<Integer>> list = new LinkedList<>();
             for (int i = 1; i < n; i++) {
