@@ -1,6 +1,3 @@
-import org.omg.CORBA.INTERNAL;
-
-import java.beans.IntrospectionException;
 import java.util.*;
 
 public class HelloWord {
@@ -11,6 +8,34 @@ public class HelloWord {
 
     @SuppressWarnings("all") //压制警告
     static class Solution {
+        public static List<Integer> preorderTraversal(TreeNode root) {
+            ArrayDeque<TreeNode> deque = new ArrayDeque<>();
+            List<Integer> list = new LinkedList<>();
+            if (root == null) return list;
+            deque.add(root);
+            while (!deque.isEmpty()){
+                TreeNode node = deque.remove();
+                list.add(node.val);
+                if (node.left != null) deque.add(node.left);
+                if (node.right != null) deque.add(node.right);
+            }
+            return list;
+        }
+
+        public static List<Integer> preorderTraversal1(TreeNode root){
+            Stack<TreeNode> stack = new Stack<>();
+            List<Integer> list = new LinkedList<>();
+            if (root == null) return list;
+            stack.push(root);
+            while (!stack.isEmpty()){
+                TreeNode node = stack.pop();
+                list.add(node.val);
+                if (node.right != null) stack.push(node.right);
+                if (node.left != null) stack.push(node.left);
+            }
+            return list;
+        }
+
         public static boolean isPerfectSquare(int num) {
             if (num == 1 || num == 0) return true;
             long n = num / 2, x = 0, y = num, k = 0;
@@ -1599,6 +1624,7 @@ public class HelloWord {
         }
     }
 
+    @SuppressWarnings("all")
     public static class Node {
         public int val;
         public List<Node> neighbors;
